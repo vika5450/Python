@@ -1,28 +1,18 @@
-def dfs(graph, start):
-    visited = set()  # Множество посещенных вершин
-    stack = [(start, 0)]  # Стек для обхода, включая длину шага
+# Алгоритм
+def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start)
 
-    while stack:
-        vertex, distance = stack.pop()  # Извлекаем вершину и длину шага из стека
+    print(start)
 
-        if vertex not in visited:
-            visited.add(vertex)  # Посещаем вершину
-            print(vertex, distance)  # Можно изменить на сохранение в путь
+    for next in graph[start] - visited:
+        dfs(graph, next, visited)
+    return visited
 
-            # Добавляем непосещенные соседние вершины с учетом расстояния в стек
-            neighbors = graph[vertex]
-            for neighbor, step in neighbors:
-                if neighbor not in visited:
-                    stack.append((neighbor, distance + step))
 
-# Пример графа с длиной
-# шага между вершинами
-graph = {
-    1: [(3, 2)],
-    2: [(4, 1)],
-    3: [],
-    4: [(2, 3)]
-}
+graph = {'0': set(['4', '2']),
+         '1': set(['1', '3']),
+         '2': set(['2', '4'])}
 
-# Запуск обхода в глубину 1
-dfs(graph, 1)
+dfs(graph, '0')
