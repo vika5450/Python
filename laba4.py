@@ -9,10 +9,10 @@ def dfs(graph, start, visited=None):
     for next in graph[start] - visited:
         dfs(graph, next, visited)
     return visited
-
+#комментарий в исходный код
 
 graph = {'0': set(['4', '2']),
          '1': set(['1', '3']),
          '2': set(['2', '4'])}
 
-dfs(graph, '0'))
+dfs(graph, '0')
